@@ -1,4 +1,4 @@
-c-sharp-api
-===========
+CARDPAY API C# library
+=======================
 
-Cardpay API, C# language.
+[www.cardpay.com](http://www.cardpay.com)

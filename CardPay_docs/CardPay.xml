@@ -1,0 +1,696 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CardPay</name>
+    </assembly>
+    <members>
+        <member name="T:CardPay.CardPayException">
+            <summary>
+            CardPay exception
+            </summary>
+        </member>
+        <member name="T:CardPay.interfaces.ICardPayListener">
+            <summary>
+            API listener
+            </summary>
+        </member>
+        <member name="M:CardPay.interfaces.ICardPayListener.OnPayCompleted(CardPay.model.response.OrderResponse)">
+            <summary>
+            Called when order request completed.
+            </summary>
+            <param name="orderResult">The order result.</param>
+        </member>
+        <member name="M:CardPay.interfaces.ICardPayListener.OnPrintFormCompleted(CardPay.model.request.PrintForm)">
+            <summary>
+            Called when print form ready.
+            </summary>
+            <param name="form">The print form.</param>
+        </member>
+        <member name="M:CardPay.interfaces.ICardPayListener.OnError(System.String)">
+            <summary>
+            Called when error occured.
+            </summary>
+            <param name="errorDescription">The error description.</param>
+        </member>
+        <member name="M:CardPay.interfaces.ICardPayListener.OnReportRequestCompleted(CardPay.model.response.ReportResponse)">
+            <summary>
+            Called when report request completed.
+            </summary>
+            <param name="reportResponse">The report response.</param>
+        </member>
+        <member name="M:CardPay.interfaces.ICardPayListener.OnChangeRequestCompleted(CardPay.model.response.ChangeResponse)">
+            <summary>
+            Called when change request completed.
+            </summary>
+            <param name="changeResponse">The change response.</param>
+        </member>
+        <member name="T:CardPay.model.response.TransactionStatus">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="T:CardPay.model.response.ChangeOrderInfo">
+            <summary>
+            Change order info
+            </summary>
+        </member>
+        <member name="P:CardPay.model.response.ChangeOrderInfo.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            Requested order's ID
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeOrderInfo.StatusTo">
+            <summary>
+            Gets or sets the status to.
+            </summary>
+            <value>
+            Requested status of the order
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeOrderInfo.RefundAmount">
+            <summary>
+            Gets or sets the refund amount.
+            </summary>
+            <value>
+            Refunded amount in the currency of processing
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeOrderInfo.Currency">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+            <value>
+            Currency of refunded amount
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeOrderInfo.RemainingAmount">
+            <summary>
+            Gets or sets the remaining amount.
+            </summary>
+            <value>
+            Amount left after refund was made
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeResponse.IsExecuted">
+            <summary>
+            Gets or sets the is executed.
+            </summary>
+            <value>
+            Indicates was the request successful or not
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeResponse.Details">
+            <summary>
+            Gets or sets the details.
+            </summary>
+            <value>
+            The reason why request was insuccessful
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ChangeResponse.OrderInfo">
+            <summary>
+            Gets or sets the order information.
+            </summary>
+            <value>
+            The order information.
+            </value>
+        </member>
+        <member name="T:CardPay.model.response.ReportOrderInfo">
+            <summary>
+            Report order info
+            </summary>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.Id">
+            <summary>
+            Gets or sets the order id.
+            </summary>
+            <value>
+            The Order's ID.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.OrderNumber">
+            <summary>
+            Gets or sets the order number.
+            </summary>
+            <value>
+            Merchant's order ID
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.StatusName">
+            <summary>
+            Gets or sets the name of the status.
+            </summary>
+            <value>
+            Current status of the order
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.DateIn">
+            <summary>
+            Gets or sets the date in.
+            </summary>
+            <value>
+            Date in UTC when the order was received
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value>
+            Order amount in the currency of processing
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.HoldNumber">
+            <summary>
+            Gets or sets the hold number.
+            </summary>
+            <value>
+            Approval code received from the bank
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportOrderInfo.EMail">
+            <summary>
+            Gets or sets the e mail.
+            </summary>
+            <value>
+            Email of customer
+            </value>
+        </member>
+        <member name="T:CardPay.model.response.ReportResponse">
+            <summary>
+            Report response
+            </summary>
+        </member>
+        <member name="P:CardPay.model.response.ReportResponse.IsExecuted">
+            <summary>
+            Gets or sets the is executed.
+            </summary>
+            <value>
+            Indicates was the request successful or not
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportResponse.OrderQty">
+            <summary>
+            Gets or sets the order qty.
+            </summary>
+            <value>
+            Quantity of orders in response, returned in case of successful request
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportResponse.Details">
+            <summary>
+            Gets or sets the details.
+            </summary>
+            <value>
+            The reason why request was insuccessful
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.ReportResponse.OrdersInfo">
+            <summary>
+            Gets or sets the orders information.
+            </summary>
+            <value>
+            The orders information.
+            </value>
+        </member>
+        <member name="T:CardPay.model.response.StatusType">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="T:CardPay.model.response.OrderResponse">
+            <summary>
+            Order result response
+            </summary>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Id">
+            <summary>
+            Gets or sets the order identifier.
+            </summary>
+            <value>
+            The order's ID
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Number">
+            <summary>
+            Gets or sets the order ID.
+            </summary>
+            <value>
+            Unique order ID used by the merchant’s shopping cart.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>
+            The status of order.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            Description of product/service being sold.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Date">
+            <summary>
+            Gets or sets the date.
+            </summary>
+            <value>
+            The date of order.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.CardBin">
+            <summary>
+            Gets or sets the card bin.
+            </summary>
+            <value>
+            The first 6 card number
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.CardNum">
+            <summary>
+            Gets or sets the card number.
+            </summary>
+            <value>
+            The card part number (mask: 6…4 or …4).
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.CardHolder">
+            <summary>
+            Gets or sets the card holder.
+            </summary>
+            <value>
+            The card holder.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.DeclineReason">
+            <summary>
+            Gets or sets the decline reason.
+            </summary>
+            <value>
+            The decline reason.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Is3D">
+            <summary>
+            Gets or sets a value indicating whether [is3 d].
+            </summary>
+            <value>
+              <c>true</c> if [is3 d]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.ApprovalCode">
+            <summary>
+            Gets or sets the approval code.
+            </summary>
+            <value>
+            The approval code.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Amount">
+            <summary>
+            Gets or sets the amount.
+            </summary>
+            <value>
+            The amount.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Refunded">
+            <summary>
+            Gets or sets the refunded.
+            </summary>
+            <value>
+            The refunded.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.Currency">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+            <value>
+            The currency.
+            </value>
+        </member>
+        <member name="P:CardPay.model.response.OrderResponse.RecurringSuccess">
+            <summary>
+            Gets or sets a value indicating whether [recurring success].
+            </summary>
+            <value>
+              <c>true</c> if [recurring success]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:CardPay.model.request.Card">
+            <summary>
+            Customer's card.
+            </summary>
+        </member>
+        <member name="P:CardPay.model.request.Card.Number">
+            <summary>
+            Gets or sets the card number (PAN).
+            </summary>
+            <value>
+            Customer's card number (PAN).
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Card.Holder">
+            <summary>
+            Gets or sets the cardholder name.
+            </summary>
+            <value>
+            Customer's cardholder name.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Card.CVV">
+            <summary>
+            Gets or sets the CVV.
+            </summary>
+            <value>
+            Customer's CVV2 / CVC2.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Card.Expires">
+            <summary>
+            Gets or sets the expiration date.
+            </summary>
+            <value>
+            Customer's card expiration date.
+            </value>
+        </member>
+        <member name="M:CardPay.CardPayAPI.#ctor(System.String,System.Int32,CardPay.interfaces.ICardPayListener)">
+            <summary>
+            Initializes a new instance of the <see cref="T:CardPay.CardPayAPI"/> class.
+            </summary>
+            <param name="secret">The secret key.</param>
+            <param name="walletId">The wallet identifier.</param>
+            <param name="listener">The listener for response.</param>
+        </member>
+        <member name="M:CardPay.CardPayAPI.Pay(CardPay.model.request.OrderRequest)">
+            <summary>
+            This method allows you to send a transaction to the CardPay server for processing
+            </summary>
+            <param name="order">Order request</param>
+        </member>
+        <member name="M:CardPay.CardPayAPI.PrintForm(CardPay.model.request.OrderRequest)">
+            <summary>
+            This method allows you to get orderXML and sha512 from order
+            </summary>
+            <param name="order">Order to process</param>
+        </member>
+        <member name="M:CardPay.CardPayAPI.GetTransactionsInfo(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This method allows you to receive transaction details
+            </summary>
+            <param name="clientLogin">User login. It is the same as for Payment Manager</param>
+            <param name="clientPassword">User password. It is the same as for Payment Manager</param>
+            <param name="dateBegin">Optional. Date from which you want to receive last 10 orders</param>
+            <param name="dateEnd">Optional. Date before which you want to receive last 10 orders</param>
+            <param name="currency">Optional. Limit result with single currency of order</param>
+            <param name="orderNumber">Optional. Order number sent with order</param>
+        </member>
+        <member name="M:CardPay.CardPayAPI.ChangeTransactionStatus(System.String,System.String,System.Int32,CardPay.model.response.TransactionStatus,System.Decimal,System.String)">
+            <summary>
+            This method allows you to receive transaction details
+            </summary>
+            <param name="clientLogin">User login. It is the same as for Payment Manager</param>
+            <param name="clientPassword">User password. It is the same as for Payment Manager</param>
+            <param name="id">ID of Order to be changed</param>
+            <param name="statusTo">Status to be set (void, capture, refund)</param>
+            <param name="amount">Optional. Only for refund. Amount to be refunded. Total refund when not sent</param>
+            <param name="reason">Optional. Required for refund. Reason of refunding</param>
+        </member>
+        <member name="T:CardPay.model.request.Address">
+            <summary>
+            Address description
+            </summary>
+        </member>
+        <member name="P:CardPay.model.request.Address.Country">
+            <summary>
+            Gets or sets the country code.
+            </summary>
+            <value>
+            ISO 3166-1 code of delivery country.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Address.State">
+            <summary>
+            Gets or sets the state.
+            </summary>
+            <value>
+            Delivery state or province.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Address.City">
+            <summary>
+            Gets or sets the city.
+            </summary>
+            <value>
+            Delivery city.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Address.ZIP">
+            <summary>
+            Gets or sets the zip.
+            </summary>
+            <value>
+            Delivery post code.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Address.Street">
+            <summary>
+            Gets or sets the street.
+            </summary>
+            <value>
+            Delivery street address.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Address.Phone">
+            <summary>
+            Gets or sets the phone.
+            </summary>
+            <value>
+            Customer phone number.
+            </value>
+        </member>
+        <member name="T:CardPay.model.request.Item">
+            <summary>
+            Order item
+            </summary>
+        </member>
+        <member name="P:CardPay.model.request.Item.Name">
+            <summary>
+            Gets or sets the product name.
+            </summary>
+            <value>
+            The name of product / service, provided to the customer.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Item.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            Description of product / service, provided to the customer.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Item.Count">
+            <summary>
+            Gets or sets the count.
+            </summary>
+            <value>
+            Product / service quantity.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Item.Price">
+            <summary>
+            Gets or sets the price.
+            </summary>
+            <value>
+            Price of product / service.
+            </value>
+        </member>
+        <member name="T:CardPay.model.request.OrderRequest">
+            <summary>
+            Transaction request
+            </summary>
+        </member>
+        <member name="M:CardPay.model.request.OrderRequest.toString">
+            <summary>
+            Get XML-string from order object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CardPay.model.request.OrderRequest.toBase64">
+            <summary>
+            Get base64-string from order object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CardPay.model.request.OrderRequest.toSHA512(System.String)">
+            <summary>
+            Get sha512-string from order object.
+            </summary>
+            <param name="secret">The secret.</param>
+            <returns></returns>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.WalletID">
+            <summary>
+            Gets or sets the Unique merchant's ID.
+            </summary>
+            <value>
+            Unique merchant's ID used by the CardPay payment system
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Number">
+            <summary>
+            Gets or sets the order ID.
+            </summary>
+            <value>
+            Unique order ID used by the merchant’s shopping cart.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Amount">
+            <summary>
+            Gets or sets the order amount.
+            </summary>
+            <value>
+            The total order amount in your account’s selected currency.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.EMail">
+            <summary>
+            Gets or sets the customer’s e-mail.
+            </summary>
+            <value>
+            Customer’s e-mail address.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            Description of product/service being sold.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.IsTwoPhase">
+            <summary>
+            Gets or sets a value indicating whether this instance is two phase.
+            </summary>
+            <value>
+            If <c>true</c> the amount will not be captured but only blocked.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Currency">
+            <summary>
+            Gets or sets the currency code.
+            </summary>
+            <value>
+            ISO 4217 currency code.
+            </value>
+            <exception cref="T:CardPay.CardPayException"></exception>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.IsGateway">
+            <summary>
+            Gets or sets the Gateway Mode.
+            </summary>
+            <value>
+            If <c>true</c> the Gateway Mode will be used.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.IP">
+            <summary>
+            Gets or sets the ip.
+            </summary>
+            <value>
+            Customer’s IPv4.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Locale">
+            <summary>
+            Gets or sets the locale.
+            </summary>
+            <value>
+            Preferred locale for the payment page. The default locale (en) will be applied if the selected locale is not supported.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Items">
+            <summary>
+            Gets or sets the order items.
+            </summary>
+            <value>
+            Order items.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Shipping">
+            <summary>
+            Gets or sets the shipping address.
+            </summary>
+            <value>
+            Shipping Address
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Billing">
+            <summary>
+            Gets or sets the billing address.
+            </summary>
+            <value>
+            The billing address
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.OrderRequest.Card">
+            <summary>
+            Gets or sets the customer's card
+            </summary>
+            <value>
+            The Customer's card.
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Reccuring.Period">
+            <summary>
+            Gets or sets the period.
+            </summary>
+            <value>
+            Period in days of extension of service
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Reccuring.Price">
+            <summary>
+            Gets or sets the price.
+            </summary>
+            <value>
+            Cost of extension of service
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Reccuring.Begin">
+            <summary>
+            Gets or sets the begin.
+            </summary>
+            <value>
+            Date from which recurring payments begin
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Reccuring.Count">
+            <summary>
+            Gets or sets the count.
+            </summary>
+            <value>
+            Number of recurring payments
+            </value>
+        </member>
+        <member name="P:CardPay.model.request.Reccuring.BeginId">
+            <summary>
+            Gets or sets the begin identifier.
+            </summary>
+            <value>
+            Can be used instead of all other attributes to continue payment manually in Gateway Mode. Must contain ID of the initial transaction.
+            </value>
+        </member>
+    </members>
+</doc>
